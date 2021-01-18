@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  api:
+    build: ./server
+    environment:
+      MONGO_URL: poll-db:27017
+    volumes:
+      - ./server:/usr/src/app
+    ports: 
+      - "5000:5000"
+      - "9229:9229"
+    command: npm run debug
+    depends_on: 
+      - db
+    container_name: poll-api
+  client:
+    build: ./client
+    environment:
+      REACT_APP_SERVER_API: http://localhost:5000
+      REACT_APP_SERVER_ENDPOINT: api
+    volumes:
+      - ./client:/usr/src/app
+      - nodemodules:/usr/src/app/node_modules
+    ports: 
+      - "3000:3000"
+    depends_on: 
+      - api
+    container_name: poll-client
+  db:
+    image: mongo
+    ports: 
+      - "27017:27017"
+    container_name: poll-db
+volumes:
+    nodemodules: {}
