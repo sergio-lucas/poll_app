@@ -9,4 +9,4 @@ const Poll = new Schema(
     { timestamps: true },
 )
 
-module.exports = mongoose.model('polls', Poll)
+module.exports = mongoose.model('poll', Poll)

@@ -3,6 +3,7 @@ const mongoUrl = process.env.MONGO_URL || 'poll-db:27017';
 
 mongoose
     .connect(`mongodb://${mongoUrl}/pool_app`, { useNewUrlParser: true, useUnifiedTopology: true })
+    .set('debug', true)
     .catch(e => {
         console.error('Connection error', e.message)
     })

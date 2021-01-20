@@ -11,8 +11,8 @@ createPoll = (req, res) => {
     }
 
     const poll = new Poll({
-        name: 12,
-        dates: ["123", "312"]
+        name: body.name,
+        dates: body.dates
     })
 
     if (!poll) {
