@@ -6,7 +6,7 @@ const passport = require('passport')
 const db = require('./db')
 const pollRouter = require('./routes/poll-router')
 const userRouter = require('./routes/user-router')
-const passport = require('./config/passport')
+require('./config/passport')
 
 const app = express()
 const apiPort = 5000
@@ -16,6 +16,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 app.use(passport.initialize())
+app.use(passport.session());
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
