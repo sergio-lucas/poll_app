@@ -1,22 +1,21 @@
-import React, { Component } from 'react'
+import React from "react";
+import Logo from "./Logo";
+import Links from "./Links";
+import {
+  Container, TopNav,
+} from "./content";
 
-import Logo from './Logo'
-import Links from './Links'
-import { Container, TopNav } from './content'
 
+function NavBar() {
+  return (
+    <TopNav>
+      <Container>
+        <Logo />
 
-
-class NavBar extends Component {
-    render() {
-        return (
-          <TopNav>
-            <Container>
-              <Logo />
-              <Links />
-            </Container>
-          </TopNav>
-        )
-    }
+        <Links />
+      </Container>
+    </TopNav>
+  );
 }
 
-export default NavBar
+export default NavBar;

@@ -5,8 +5,9 @@ const Poll = new Schema(
     {
         name: { type: String, required: true },
         dates: { type: [String], required: true },
+        author: { type: Schema.Types.ObjectId, ref: 'User' },
     },
     { timestamps: true },
 )
 
-module.exports = mongoose.model('poll', Poll)
+module.exports = mongoose.model('Poll', Poll)

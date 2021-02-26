@@ -1,0 +1,43 @@
+{
+  "extends": ["airbnb", "airbnb/hooks"],
+  "plugins": [
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "no-var": "error",
+    "no-mixed-spaces-and-tabs": "error",
+    "no-trailing-spaces": "warn",
+    "no-multi-spaces": "warn",
+    "key-spacing": ["warn", {"beforeColon": false, "afterColon": true}],
+    "no-multiple-empty-lines": ["error", { "max": 2 }],
+    "comma-dangle": ["error", "always-multiline"],
+    "comma-spacing": [1, {"before": false, "after": true}],
+    "consistent-return": ["error"],
+    "comma-style": ["error", "last"],
+    "object-curly-spacing": ["error", "always"],
+    "object-property-newline": "error",
+    "object-curly-newline": ["error", {
+      "ObjectExpression": "always",
+      "ObjectPattern": { "multiline": true },
+      "ImportDeclaration": { "multiline": true, "minProperties": 2, "consistent": true }
+    }],
+    "object-shorthand": ["error", "always"],
+    "react/jsx-indent-props": ["error", 2],
+    "react/jsx-indent": ["error", 2],
+    "no-extra-semi": "warn",
+    "semi": "error",
+    "indent": ["warn", 2],
+    "camelcase": "warn",
+    "new-cap": [1, {"newIsCap": true, "capIsNew": false}],
+    "newline-after-var": "error",
+    "quotes": ["warn", "double"],
+    "space-before-blocks": "error",
+    "space-before-function-paren": "off"
+  }
+}

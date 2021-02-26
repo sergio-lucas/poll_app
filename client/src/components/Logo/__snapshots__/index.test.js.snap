@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot::<Logo /> component should render the contents of the component 1`] = `
+<a
+  className="sc-bdfBwQ navbar-brand"
+  href="/"
+>
+  <img
+    alt="Poll app"
+    height="ds"
+    src="logo.svg"
+  />
+</a>
+`;

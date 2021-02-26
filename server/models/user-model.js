@@ -6,9 +6,10 @@ const User = new Schema(
   {
     email: { type: String, required: true, unique: true },
     name: { type: String, required: true }
-  }
+  },
+  { timestamps: true },
 )
 
 User.plugin(findOrCreate);
 
-module.exports = mongoose.model("user", User)
+module.exports = mongoose.model("User", User)
