@@ -10,6 +10,6 @@ export function debounce(f, ms) {
 
     isRun = true;
 
-    setTimeout(() => { isRun = false; }, ms);
+    // setTimeout(() => { isRun = false; }, ms);
   };
 }
