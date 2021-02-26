@@ -9,6 +9,9 @@
       "jsx": true
     }
   },
+  "env": {
+    "jest": true
+  },
   "rules": {
     "no-var": "error",
     "no-mixed-spaces-and-tabs": "error",
