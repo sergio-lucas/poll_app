@@ -17,14 +17,14 @@ describe("debounce", function() {
 
     let f = debounce(fun, 1000);
 
-    f(1,);
-    f(2,);
+    f(1);
+    f(2);
 
-    setTimeout(() => f(4,), 1100);
+    setTimeout(() => f(4), 1100);
 
-    expect(setTimeout,).toHaveBeenCalledTimes(2,);
-    expect(setTimeout,).toHaveBeenCalledWith(expect.any(Function,), 1100,);
-  },);
+    expect(setTimeout).toHaveBeenCalledTimes(2);
+    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 1100);
+  });
 
   it("save context", function() {
     let obj = {
