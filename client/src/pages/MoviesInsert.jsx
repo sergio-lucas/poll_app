@@ -1,23 +1,26 @@
-import React, { Component } from 'react'
+import React from "react";
 
-class MoviesInsert extends Component {
-    render() {
-        return (
-            <div>
-                <form>
-                  <div class="form-group">
-                    <label for="poll_name">Name your poll field:</label>
-                    <input type="input" class="form-control" id="poll_name" placeholder="Enter poll name" />
-                  </div>
-                  <div class="form-group">
-                    <label for="poll_dates">Choose available dates field:</label>
-                    <input type="input" class="form-control" id="poll_dates" placeholder="Choose dates" />
-                  </div>
-                  <button type="submit" class="btn btn-primary">Save a poll</button>
-                </form>
-            </div>
-        )
-    }
+
+function MoviesInsert() {
+  return (
+    <div>
+      <form>
+        <div className="form-group">
+          <label htmlFor="poll_name">
+            Name your poll field:
+            <input type="input" className="form-control" id="poll_name" placeholder="Enter poll name" />
+          </label>
+        </div>
+        <div className="form-group">
+          <label htmlFor="poll_dates">
+            Choose available dates field:
+            <input type="input" className="form-control" id="poll_dates" placeholder="Choose dates" />
+          </label>
+        </div>
+        <button type="submit" className="btn btn-primary">Save a poll</button>
+      </form>
+    </div>
+  );
 }
 
-export default MoviesInsert
+export default MoviesInsert;

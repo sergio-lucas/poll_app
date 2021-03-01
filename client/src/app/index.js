@@ -1,9 +1,14 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router, Route, Switch,
+} from "react-router-dom";
 
 import { NavBar } from "../components";
 import { Container } from "../components/content";
-import { MoviesList, MoviesInsert, MoviesUpdate, Home } from "../pages";
+import {
+  MoviesList, MoviesInsert, MoviesUpdate, Home,
+} from "../pages";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 

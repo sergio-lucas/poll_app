@@ -14,7 +14,8 @@
     "react-scripts": "4.0.1",
     "react-table": "^7.6.2",
     "styled-components": "^5.2.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "prop-types": "^15.7.2"
   },
   "scripts": {
     "postinstall": "cd .. && husky install client/.husky",
@@ -37,7 +38,7 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.20.0",
+    "eslint": "^7.21.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",

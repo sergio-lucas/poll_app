@@ -4,13 +4,15 @@
     "react"
   ],
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 8,
     "ecmaFeatures": {
       "jsx": true
     }
   },
   "env": {
-    "jest": true
+    "jest": true,
+    "browser": true,
+    "es6": true
   },
   "rules": {
     "no-var": "error",
@@ -41,6 +43,7 @@
     "newline-after-var": "error",
     "quotes": ["warn", "double"],
     "space-before-blocks": "error",
-    "space-before-function-paren": "off"
+    "space-before-function-paren": "off",
+    "import/prefer-default-export": "off"
   }
 }

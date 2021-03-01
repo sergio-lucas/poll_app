@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { useTable } from 'react-table'
-import api from '../api'
-
-import styled from 'styled-components'
+/* eslint-disable react/jsx-props-no-spreading */
+import React, {
+  useState, useEffect,
+} from "react";
+import PropTypes from "prop-types";
+import { useTable } from "react-table";
+import styled from "styled-components";
+import { getAllMovies } from "../api";
 
 
 const Styles = styled.div`
@@ -32,98 +35,100 @@ const Styles = styled.div`
       }
     }
   }
-`
+`;
 
 function Table({ columns, data }) {
-    // Use the state and functions returned from useTable to build your UI
-    const {
-      getTableProps,
-      getTableBodyProps,
-      headerGroups,
-      rows,
-      prepareRow,
-    } = useTable({
-      columns,
-      data,
-    })
-  
-    // Render the UI for your table
-    return (
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-              ))}
+  // Use the state and functions returned from useTable to build your UI
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({
+    columns,
+    data,
+  });
+
+  // Render the UI for your table
+  return (
+    <table {...getTableProps()}>
+      <thead>
+        {headerGroups.map((headerGroup) => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column) => (
+              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map((row) => {
+          prepareRow(row);
+          return (
+            <tr {...row.getRowProps()}>
+              {row.cells.map((cell) => <td {...cell.getCellProps()}>{cell.render("Cell")}</td>)}
             </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row, i) => {
-            prepareRow(row)
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                })}
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
-    )
-  }
-
-function MoviesList() {
-
-    const [movies, setMovies] = useState([])
-    const [isLoading, setLoading] = useState(false)
-
-    const loadAsyncData = async () => {
-        const movies = await api.getAllMovies()
-        setMovies(movies.data.data)
-        setLoading(false)
-    }
-
-    useEffect(() => {
-    
-        loadAsyncData();
-        
-    }, []);
-    
-
-    const columns = [
-        {
-            Header: 'ID',
-            accessor: '_id',
-            filterable: true,
-        },
-        {
-            Header: 'Name',
-            accessor: 'name',
-            filterable: true,
-        },
-        {
-            Header: 'Time',
-            accessor: 'dates',
-            Cell: props => <span>{props.value.join(' / ')}</span>,
-        },
-    ]
-
-    let showTable = true
-    // if (!movies.length) {
-    //     showTable = false
-    // }
-    // const tableInstance = useTable({ columns, data: movies })
-
-    return (
-        <Styles>
-            {showTable && <Table columns={columns} data={movies} />
-            }
-        </Styles>
-    )
+          );
+        })}
+      </tbody>
+    </table>
+  );
 }
 
-export default MoviesList
+Table.propTypes = {
+  columns: PropTypes.isRequired,
+  data: PropTypes.isRequired,
+};
+
+function MoviesList() {
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+
+  const loadAsyncData = async () => {
+    setLoading(true);
+    const moviesData = await getAllMovies();
+
+    setMovies(moviesData.data.data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    loadAsyncData();
+  }, []);
+
+
+  const columns = [
+    {
+      Header: "ID",
+      accessor: "_id",
+      filterable: true,
+    },
+    {
+      Header: "Name",
+      accessor: "name",
+      filterable: true,
+    },
+    {
+      Header: "Time",
+      accessor: "dates",
+      // eslint-disable-next-line react/prop-types
+      Cell: ({ value }) => <span>{value.join(" / ")}</span>,
+    },
+  ];
+
+  const showTable = true;
+  // if (!movies.length) {
+  //     showTable = false
+  // }
+  // const tableInstance = useTable({ columns, data: movies })
+
+  return (
+    <Styles>
+      {showTable && !isLoading && <Table columns={columns} data={movies} />}
+    </Styles>
+  );
+}
+
+export default MoviesList;
 

@@ -1,36 +1,38 @@
-import React, { Component } from 'react'
+import React from "react";
 
 const fbLogin = () => {
-  var FB = window.FB;
-  FB.login(result => {
-    debugger
-            if (result.authResponse) {
-              const data = { access_token: result.authResponse.accessToken };
+  const { FB } = window;
 
-        fetch('http://localhost:5000/api/auth/facebook/token', {
-          method: 'POST', // or 'PUT'
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        })
-        .then(response => {
-          return response.json()
-        })
-        .then(data => {
-          console.log('Success:', data);
+  FB.login((result) => {
+    if (result.authResponse) {
+      const fbData = {
+        access_token: result.authResponse.accessToken,
+      };
+
+      fetch("http://localhost:5000/api/auth/facebook/token", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(fbData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error("Error:", error);
         });
     }
-    }, {scope: 'email'})
-}
+  }, {
+    scope: "email",
+  });
+};
 const Home = () => (
   <div>
-    <a href="#" onClick={fbLogin}>FB login</a>
+    <button type="button" onClick={fbLogin}>FB login</button>
     <a href="http://localhost:5000/api/auth/google">G login</a>
   </div>
-)
+);
 
-export default Home
+export default Home;

@@ -1,6 +1,8 @@
 import axios from "axios";
 
-import { SERVER_URL, SERVER_ENDPOINT } from "../app/config";
+import {
+  SERVER_URL, SERVER_ENDPOINT,
+} from "../app/config";
 
 const api = axios.create({
   baseURL: `${SERVER_URL}/${SERVER_ENDPOINT}`,

@@ -25,41 +25,39 @@ const Item = styled.div.attrs({
 const foo = 1;
 const bar = 2;
 
-class Links extends Component {
-  render() {
-    return (
-      <>
-        <Link
-          className="navbar-brand"
-          to="/"
-        >
-          Poll App
-        </Link>
+function Links() {
+  return (
+    <>
+      <Link
+        className="navbar-brand"
+        to="/"
+      >
+        Poll App
+      </Link>
 
-        <Collapse>
-          <List>
-            <Item>
-              <Link
-                className="nav-link"
-                to="/poll/list"
-              >
-                List Poll
-              </Link>
-            </Item>
+      <Collapse>
+        <List>
+          <Item>
+            <Link
+              className="nav-link"
+              to="/poll/list"
+            >
+              List Poll
+            </Link>
+          </Item>
 
-            <Item>
-              <Link
-                className="nav-link"
-                to="/poll/create"
-              >
-                Create Poll
-              </Link>
-            </Item>
-          </List>
-        </Collapse>
-      </>
-    );
-  }
+          <Item>
+            <Link
+              className="nav-link"
+              to="/poll/create"
+            >
+              Create Poll
+            </Link>
+          </Item>
+        </List>
+      </Collapse>
+    </>
+  );
 }
 
 export default Links;
