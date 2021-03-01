@@ -25,6 +25,7 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+    <meta name="google-signin-client_id" content="286349677291-4rr1ftn907c6tug6s1ni6bkfrql1403g.apps.googleusercontent.com">
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -39,6 +40,7 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
   </body>
   <script>
     window.fbAsyncInit = function() {
@@ -48,11 +50,11 @@
         xfbml      : true,
         version    : 'v9.0'
       });
-        
-      FB.AppEvents.logPageView();   
-        
+
+      FB.AppEvents.logPageView();
+
     };
-  
+
     (function(d, s, id){
        var js, fjs = d.getElementsByTagName(s)[0];
        if (d.getElementById(id)) {return;}
@@ -60,5 +62,28 @@
        js.src = "https://connect.facebook.net/en_US/sdk.js";
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+  </script>
+  <script>
+    function start() {
+      gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+          client_id: '286349677291-4rr1ftn907c6tug6s1ni6bkfrql1403g.apps.googleusercontent.com',
+          // Scopes to request in addition to 'profile' and 'email'
+          // scope: 'additional_scope'
+        });
+      });
+    }
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      var id_token = googleUser.getAuthResponse().id_token;
+      console.log(id_token);
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
   </script>
 </html>

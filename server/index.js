@@ -3,6 +3,7 @@ const session = require("express-session")
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const passport = require('passport')
+const expressJwt = require('express-jwt')
 
 const db = require('./db')
 const pollRouter = require('./routes/poll-router')
@@ -20,6 +21,17 @@ var corsOption = {
   credentials: true,
   exposedHeaders: ['x-auth-token']
 };
+var authenticate = expressJwt({
+  secret: 'my-secret',
+  requestProperty: 'auth',
+  algorithms: ['HS256'],
+  getToken: function(req) {
+    if (req.headers['x-auth-token']) {
+      return req.headers['x-auth-token'];
+    }
+    return null;
+  }
+});
 app.use(cors(corsOption))
 app.use(session({ secret: "cats" }))
 app.use(bodyParser.json())
@@ -33,9 +45,14 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.get('/profile', isLoggedIn, (req, res) => {
-    res.json({login: true})
-})
+// app.get('/profile', isLoggedIn, (req, res) => {
+//     res.json({login: true})
+// })
+app.route('/profile')
+    .get(authenticate, (req, res) => {
+        res.json({login: true})
+        // return res.sendStatus(401);
+    })
 
 app.get('/logout', function(req, res){
     req.logout();
@@ -55,5 +72,12 @@ function isLoggedIn(req, res, next) {
 
 app.use('/api', pollRouter)
 app.use('/api', userRouter)
+
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).json({login: false});
+    // res.json({login: true})
+  }
+});
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))

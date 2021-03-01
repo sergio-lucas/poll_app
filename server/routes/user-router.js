@@ -9,7 +9,7 @@ var createToken = function(auth) {
     id: auth.id
   }, 'my-secret',
   {
-    expiresIn: 60 * 120
+    expiresIn: 60
   });
 };
 
@@ -50,6 +50,21 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', {
   successRedirect: '/profile',
   failureRedirect: '/login'
 }));
+
+router.route('/auth/google/token')
+.post(passport.authenticate('google-token'), function(req, res, next) {
+  if (!req.user) {
+    return res.send(401, 'User Not Authenticated');
+  }
+
+  // prepare token for API
+  req.auth = {
+    id: req.user.id
+  };
+
+  next();
+},
+generateToken, sendToken)
 
 // router.get('/auth/google', passport.authenticate('google', { 
 //     scope: ['https://www.googleapis.com/auth/userinfo.email',

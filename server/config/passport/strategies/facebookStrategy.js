@@ -19,12 +19,12 @@ module.exports = () => {
     }
     User.findOrCreate(search, newUser, function(err, user) {
       if (err) { return done(err); }
-      const poll = new Poll({
-        name: "test",
-        dates: ["123"],
-        author: user._id
-      })
-      poll. save()
+      // const poll = new Poll({
+      //   name: "test123",
+      //   dates: ["123"],
+      //   author: user._id
+      // })
+      // poll.save()
       done(null, user);
     });
   }
