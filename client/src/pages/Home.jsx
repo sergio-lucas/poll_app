@@ -18,6 +18,7 @@ const fbLogin = () => {
       })
         .then((response) => {
           console.log(response.headers.get("x-auth-token"));
+          localStorage.setItem("token", response.headers.get("x-auth-token"));
           return response.json();
         })
         .then((data) => {
@@ -52,6 +53,7 @@ const gLogin = () => {
         })
           .then((response) => {
             console.log(response.headers.get("x-auth-token"));
+            localStorage.setItem("token", response.headers.get("x-auth-token"));
             return response.json();
           })
           .then((data) => {
